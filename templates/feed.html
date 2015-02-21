@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Add Show</title>
+
+    <link href="/css/jquery-ui.min.css" rel="stylesheet">
+    <link href="/css/bootstrap3.min.css" rel="stylesheet">
+    <link href="/css/cover.css" rel="stylesheet">
+
+  </head>
+  <body>
+
+    <div class="site-wrapper">
+
+      <div class="site-wrapper-inner">
+
+        <div class="cover-container">
+
+          <div class="masthead clearfix">
+            <div class="inner">
+              <h3 class="masthead-brand">Lights 'n Shit</h3>
+              <ul class="nav masthead-nav">
+                <li><a href="#">Feed</a></li>
+                <li class="active"><a href="#">Add</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="inner cover">
+            <h1 class="cover-heading">add a show.</h1>
+            <div class="lead">
+                {% if image_urls %}
+                  {% for media in image_urls %}
+                    <div class="span3">
+                      <img src="{{media}}" style="height:50%;width:50%">
+                    </div>
+                  {% endfor %}
+                {% endif %}
+            </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="/js/libs/jquery-ui.min.js"></script>
+    <script src="/js/libs/bootstrap3.min.js"></script>
+  </body>
+</html>

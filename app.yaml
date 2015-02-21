@@ -1,0 +1,75 @@
+# Replace 'ae-essence' with your application name
+application: zeta-yen-786
+version: 1 
+runtime: python27
+api_version: 1
+threadsafe: true
+
+default_expiration: "30d"
+
+builtins:
+#- datastore_admin: on
+
+libraries:
+- name: django
+  version: latest
+
+
+handlers:
+# Cron jobs and other secured things
+- url: /services.*
+  script: services.appliction
+  login: admin
+
+# If non-authenticated user, appengine will ask for login and redirect afterwards: 
+- url: /account
+  script: app.application
+  login: required
+
+# Override appengine url to provide custom OpenID login page 
+- url: /_ah/login_required
+  script: app.application
+
+# html-5 boilerplate redirects from /... to /static/... 
+- url: /favicon\.ico
+  mime_type: image/png
+  static_files: static/favicon.ico
+  upload: static/favicon.ico
+
+- url: /(robots\.txt|humans\.txt|crossdomain\.xml)
+  static_files: static/\1
+  upload: static/(robots\.txt|humans\.txt|crossdomain\.xml)
+
+- url: /img/(.*\.(gif|png|jpg))
+  static_files: static/img/\1
+  upload: static/img/(.*\.(gif|png|jpg))
+  
+- url: /swf/(.*\.swf)
+  static_files: static/swf/\1
+  upload: static/swf/(.*\.swf)
+
+- url: /css/(.*\.css)
+  mime_type: text/css
+  static_files: static/css/\1
+  upload: static/css/(.*\.css)
+
+- url: /fonts/(.*\.(eot|svg|svgs|ttf|woff))
+  #mime_type: text/css
+  static_files: static/fonts/\1
+  upload: static/fonts/(.*\.(eot|svg|svgz|ttf|woff))
+
+
+- url: /js/(.*\.js)
+  mime_type: text/javascript
+  static_files: static/js/\1
+  upload: static/js/(.*\.js)
+
+#Do you really need static html files?
+#- url: /(.*\.html)
+#  mime_type: text/html
+#  static_files: static/\1
+#  upload: static/(.*\.html)
+    
+# All other requests go to app.py
+- url: /.*
+  script: app.application

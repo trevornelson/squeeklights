@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Add Show</title>
+
+    <link href="/css/jquery-ui.min.css" rel="stylesheet">
+    <link href="/css/bootstrap3.min.css" rel="stylesheet">
+    <link href="/css/cover.css" rel="stylesheet">
+
+    <!-- Bootstrap Form Helpers -->
+    <link href="/css/bootstrap-formhelpers.min.css" rel="stylesheet" media="screen">
+
+    <!-- Google Places API -->
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
+    <style>
+      html, body, #map-canvas {
+        height: 100%;
+        margin: 0px;
+        padding: 0px
+      }
+    </style>
+    <style>
+      .fork img {
+        position: fixed;
+        top: 0;
+        right: 0;
+        z-index: 2000;
+      }
+      #locationField, #controls {
+        position: relative;
+        width: 660px;
+        padding: 10px;
+      }
+      #autocomplete {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        width: 99%;
+        background-color: #4C4C4C;
+        border-color: #E6E6E6;
+        color: #FAFAFA;
+      }
+      #band {
+        background-color: #4C4C4C;
+        border-color: #E6E6E6;
+        color: #FAFAFA;
+      }
+      .label {
+        text-align: right;
+        font-weight: bold;
+        width: 100px;
+        color: #303030;
+      }
+      #address {
+        border: 1px solid #000090;
+        background-color: #f0f0ff;
+        width: 480px;
+        padding-right: 2px;
+      }
+      #address td {
+        font-size: 10pt;
+      }
+      .field {
+        width: 99%;
+      }
+      .slimField {
+        width: 80px;
+      }
+      .wideField {
+        width: 200px;
+      }
+      #locationField {
+        height: 20px;
+        margin-bottom: 20px;
+        margin-top: 10px;
+      }
+    </style>
+    <script>
+    var placeSearch, autocomplete;
+
+    function initialize() {
+      // Create the autocomplete object, restricting the search
+      // to geographical location types.
+      autocomplete = new google.maps.places.Autocomplete(
+          /** @type {HTMLInputElement} */(document.getElementById('autocomplete')),
+          { types: ['establishment'] });
+      // When the user selects an address from the dropdown,
+      // populate the address fields in the form.
+      google.maps.event.addListener(autocomplete, 'place_changed', function() {
+        fillInAddress();
+      });
+    }
+
+    // [START region_fillform]
+    function fillInAddress() {
+      // Get the place details from the autocomplete object.
+      var place = autocomplete.getPlace();
+
+      // Get each component of the address from the place details
+      // and fill the corresponding field on the form.
+      latitude = place.geometry.location.lat();
+      longitude = place.geometry.location.lng();
+      venue_name = place.name;
+
+      document.getElementById("latitude").value = latitude;
+      document.getElementById("longitude").value = longitude;
+      document.getElementById("venue_name").value = venue_name;
+    }
+    </script>
+
+  </head>
+  <body onload="initialize()">
+
+    <div class="site-wrapper">
+
+      <div class="site-wrapper-inner">
+
+        <div class="cover-container">
+
+          <div class="masthead clearfix">
+            <div class="inner">
+              <h3 class="masthead-brand">Lights 'n Shit</h3>
+              <ul class="nav masthead-nav">
+                <li><a href="#">Feed</a></li>
+                <li class="active"><a href="#">Add</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="inner cover">
+            <h1 class="cover-heading">add a show.</h1>
+            <div class="lead">
+                <div id="locationField" class="span12">
+                    <input id="autocomplete" placeholder="Find venue" class="form-control" type="text"/>
+                </div>
+                <br>
+                <form method="POST" id="venue_form" class="form-group">
+                    <input id="band" name="band" type="text" class="form-control" placeholder="Band/artist name">
+                    <input id="longitude" name="longitude" type="hidden" value="">
+                    <input id="latitude" name="latitude" type="hidden" value="">
+                    <input id="venue_name" name="venue_name" type="hidden" value="">
+                    <input id="start_timestamp" name="start_timestamp" type="hidden" value="">
+                    <input id="end_timestamp" name="end_timestamp" type="hidden" value="">
+                </form>
+                <br>
+                <div class="bfh-datepicker" id="date">
+                </div>
+                <br>
+                <div class="bfh-timepicker" id="time" data-time="20:00">
+                </div>
+                <br>
+                <button class="btn btn-lg btn-default" style="float:left" onclick="convertTimestamp()">Add</button>
+
+                
+              </div>
+            </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="/js/libs/jquery-ui.min.js"></script>
+    <script src="/js/libs/bootstrap3.min.js"></script>
+    <script src="js/libs/bootstrap-formhelpers.min.js"></script>
+    <script src="/js/libs/form_submit.js"></script>
+    <script src="/js/libs/date.js"></script>
+  </body>
+</html>

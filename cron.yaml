@@ -1,0 +1,4 @@
+cron:
+- description: daily check of instagram
+  url: /services/fetch-instagram
+  schedule: every 24 hours
