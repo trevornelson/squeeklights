@@ -56,7 +56,7 @@ class testUpdate(BaseRequestHandler):
     def get(self):
         client_id='8393870dc08f47348d92bb0a759d0aa8'
         client_secret='3cc856fcf7f74ed09af7052f0710ad15'
-        current_time = time.time()        
+        current_time = time.time()
 
         api = instagram.client.InstagramAPI(client_id=client_id, client_secret=client_secret)
         v = Venue.all().filter("status =", "unfetched").fetch(1000)
@@ -127,7 +127,7 @@ class imageFeed(BaseRequestHandler):
 class addShow(BaseRequestHandler):
     def get(self):
         # Google Places search bar
-        self.render("index.html")
+        self.render("add-show.html")
 
     def post(self):
         venue_name = self.request.get("venue_name")
@@ -212,6 +212,6 @@ class AccountSetup(BaseRequestHandler):
 class NotFound(BaseRequestHandler):
     def get(self):
         self.error404()
-        
+
     def post(self):
         self.error404()
