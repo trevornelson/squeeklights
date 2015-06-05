@@ -87,6 +87,12 @@ class Main(BaseRequestHandler):
         self.render("index.html")
 
 
+# Admin portal request handler
+class Admin(BaseRequestHandler):
+    def get(self):
+        self.render("admin.html")
+
+
 # Email submit page request handler
 class emailSubmit(BaseRequestHandler):
     def post(self):
