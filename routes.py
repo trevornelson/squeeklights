@@ -6,6 +6,7 @@ import webapp2, handlers
 urls = [
     webapp2.Route(r'/', handler=handlers.Main, name="home"),
     webapp2.Route(r'/mail/.*', handler=handlers.emailSubmit, name="emailSubmit"),
+    webapp2.Route(r'/admin', handler=handlers.Admin, name="adminPortal"),
     webapp2.Route(r'/feed', handler=handlers.imageFeed, name="imagefeed"),
     webapp2.Route(r'/add-show', handler=handlers.addShow, name="addshow"),
     webapp2.Route(r'/test-update', handler=handlers.testUpdate, name="testupdate"),
