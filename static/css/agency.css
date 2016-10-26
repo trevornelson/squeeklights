@@ -9,6 +9,12 @@ body {
     font-family: "Roboto Slab","Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
+#chauvet-logo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .text-muted {
     color: #777;
 }
@@ -35,7 +41,7 @@ a.active {
 }
 
 a {
-    color: #fed136;
+    color: #33A3CF;
 }
 
 a.facebook {
@@ -46,11 +52,20 @@ a.facebook {
     margin-top: 30px;
 }
 
+#press {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
 a:hover,
 a:focus,
 a:active,
 a.active {
     color: #fec503;
+}
+
+a.list-group-item {
+    color: #33A3CF;
 }
 
 h1,
